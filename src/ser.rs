@@ -181,7 +181,7 @@ where
 
     #[inline]
     fn serialize_none(self) -> Result<()> {
-        self.serialize_unit()
+        Ok(())
     }
 
     #[inline]
@@ -785,7 +785,7 @@ mod tests {
     #[test]
     fn test_serialize_none() {
         let value: Option<i64> = None;
-        assert_is_unsupported_type!(to_vec(&value));
+        assert_eq!(to_vec(&&value).unwrap(), vec![]);
     }
 
     #[test]
