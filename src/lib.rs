@@ -105,25 +105,28 @@ extern crate alloc;
 #[macro_use]
 extern crate serde;
 
+mod bipaddr;
 mod bstring;
 mod de;
 mod error;
-mod bipaddr;
 
 pub mod read;
 pub mod write;
 
+#[cfg(feature = "raw_value")]
+mod raw;
+
 mod ser;
 pub mod value;
 
+#[doc(inline)]
+pub use bipaddr::ByteIpAddr;
 #[doc(inline)]
 pub use bstring::ByteString;
 #[doc(inline)]
 pub use de::{from_slice, Deserializer};
 #[doc(inline)]
 pub use error::{Error, ErrorKind, Result};
-#[doc(inline)]
-pub use bipaddr::ByteIpAddr;
 #[doc(inline)]
 pub use value::{from_value, to_value, Value};
 
@@ -137,3 +140,7 @@ pub use ser::{to_vec, Serializer};
 #[doc(inline)]
 #[cfg(feature = "std")]
 pub use de::from_reader;
+
+#[cfg(feature = "raw_value")]
+#[cfg_attr(docsrs, doc(cfg(feature = "raw_value")))]
+pub use raw::RawValue;
