@@ -56,6 +56,11 @@ impl RawValue {
     pub fn get(&self) -> &[u8] {
         &self.bencode
     }
+
+    /// Takes ownership of the raw bencode bytes held by this value.
+    pub fn into_inner(self) -> Vec<u8> {
+        self.bencode
+    }
 }
 
 impl Debug for RawValue {
